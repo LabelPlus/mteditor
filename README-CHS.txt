@@ -1,7 +1,7 @@
 ﻿
-语言：C# (.net framework 3.5) (WPF)
+语言：C# (.net framework 4) (WPF)
 
-协议：LGPL
+协议：GPL
 
 漫画翻译编辑器
 

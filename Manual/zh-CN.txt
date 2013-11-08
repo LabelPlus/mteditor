@@ -1,0 +1,18 @@
+﻿
+运行需要安装 .net Framework 4
+地址：http://www.microsoft.com/zh-cn/download/details.aspx?id=17718
+如果嫌麻烦，您还可以到游民星空下载游戏环境集合包
+
+操作简单易懂，但需要说明几点：
+
+一、图片总会另存，而文本总会尝试直接保存
+二、图片暂时只能保存为BMP格式的，所以请您寻找高效的图片处理工具，比如ImageMagick的命令行批处理等等
+三、文本在导入时只支持ANSI、有BOM的UTF-8以及Unicode编码，保存时总使用Unicode编码
+
+尽管有这样和那样的不足，但我会继续努力完善这份作品，也希望您能喜欢
+
+欢迎您提出宝贵的意见和建议，我的百度ID是：wiki908，我所在的漫画组是：无毒汉化组
+
+本项目网址：https://github.com/wiki908/mteditor
+
+by wiki908
