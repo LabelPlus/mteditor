@@ -36,7 +36,7 @@ namespace mteditor
             tbNumberNext.Text = tbGenerateFrom.Text = tbGenerateTo.Text = InitNumber;
             IsImageModified = IsTextModified = false;
             StatusGreen();
-            stStatus.Text = "就绪";
+            stStatus.Text = "请打开图片并在图片上单击以生成标号";
             //IsGlobalInitDone = true;
             UpdateColorStatus();
         }
@@ -91,13 +91,20 @@ namespace mteditor
         }
         void StatusGreen()
         {
-            bdrStatus.BorderBrush = new SolidColorBrush(Color.FromRgb(0x00, 0xFF, 0x00));
+            try
+            {
+                bdrStatus.BorderBrush = new SolidColorBrush(Color.FromRgb(0x00, 0xFF, 0x00));
+            }
+            catch { }
         }
         void StatusRed()
         {
-            bdrStatus.BorderBrush = new SolidColorBrush(Color.FromRgb(0xFF, 0x00, 0x00));
+            try
+            {
+                bdrStatus.BorderBrush = new SolidColorBrush(Color.FromRgb(0xFF, 0x00, 0x00));
+            }
+            catch { }
         }
-
         /// <summary>
         /// 文件编辑部分
         /// </summary>
@@ -118,18 +125,20 @@ namespace mteditor
                 bi.CacheOption = BitmapCacheOption.OnLoad;
                 bi.EndInit();
 
+                int numbersize = int.Parse(tbNumberSize.Text);
+
                 FormattedText txt = new FormattedText(
                     tbNumberNext.Text,
                     new CultureInfo("zh-cn"),
                     FlowDirection.LeftToRight,
                     new Typeface("Arial"),
-                    int.Parse(tbNumberSize.Text),
+                    numbersize,
                     Brushes.Red);
 
                 DrawingVisual drawingVisual = new DrawingVisual();
 
-                double DrawX = p.X * bi.PixelWidth / imgShow.ActualWidth;
-                double DrawY = p.Y * bi.PixelHeight / imgShow.ActualHeight;
+                double DrawX = p.X * bi.PixelWidth / imgShow.ActualWidth - numbersize / 2;
+                double DrawY = p.Y * bi.PixelHeight / imgShow.ActualHeight - numbersize / 2;
 
                 using (DrawingContext drawingContext = drawingVisual.RenderOpen())
                 {
@@ -418,6 +427,8 @@ namespace mteditor
             }
             return true;
         }
+        const string fmterr = "这个编辑框只能输入数字，如果要修改，可以全选后覆写";
+        const string nszerr = "\n字体大小必须介于 1-240 之间";
         private void tbNumberSize_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
@@ -426,25 +437,48 @@ namespace mteditor
                 if (size <=0 || size > 240)
                 {
                     tbNumberSize.Text = "24";
+                    StatusRed();
+                    stStatus.Text = fmterr + nszerr;
                 }
             }
             catch
             {
-                tbNumberSize.Text = "24";
+                try
+                {
+                    tbNumberSize.Text = "24";
+                    StatusRed();
+                    stStatus.Text = fmterr + nszerr;
+                }
+                catch { }
             }
             //if (!IsNumeric(tbNumberSize.Text)) tbNumberSize.Text = "0";
         }
         private void tbNumberNext_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!IsNumeric(tbNumberNext.Text)) tbNumberNext.Text = InitNumber;
+            if (!IsNumeric(tbNumberNext.Text))
+            {
+                tbNumberNext.Text = InitNumber;
+                StatusRed();
+                stStatus.Text = fmterr;
+            }
         }
         private void tbGenerateFrom_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!IsNumeric(tbGenerateFrom.Text)) tbGenerateFrom.Text = InitNumber;
+            if (!IsNumeric(tbGenerateFrom.Text))
+            {
+                tbGenerateFrom.Text = InitNumber;
+                StatusRed();
+                stStatus.Text = fmterr;
+            }
         }
         private void tbGenerateTo_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!IsNumeric(tbGenerateTo.Text)) tbGenerateTo.Text = InitNumber;
+            if (!IsNumeric(tbGenerateTo.Text))
+            {
+                tbGenerateTo.Text = InitNumber;
+                StatusRed();
+                stStatus.Text = fmterr;
+            }
         }
         private void btnGenerateNumber_Click(object sender, RoutedEventArgs e)
         {

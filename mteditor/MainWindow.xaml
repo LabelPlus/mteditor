@@ -9,6 +9,7 @@
         <Border x:Name="bdrImage" BorderBrush="Cyan" BorderThickness="1" HorizontalAlignment="Left" Height="676" Margin="10,10,0,0" VerticalAlignment="Top" Width="477">
             <Image x:Name="imgShow" MouseLeftButtonDown="imgShow_MouseLeftButtonDown"/>
         </Border>
+
         <Border x:Name="bdrText" BorderBrush="Cyan" BorderThickness="1" HorizontalAlignment="Left" Height="458" Margin="492,10,0,0" VerticalAlignment="Top" Width="444">
             <TextBox x:Name="tbTranslation" TextChanged="tbTranslation_TextChanged" Text="Translation" Background="{x:Null}" BorderBrush="{x:Null}" CaretBrush="White" Foreground="White" SelectionBrush="#FF1C4FDA" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
         </Border>

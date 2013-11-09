@@ -14,5 +14,6 @@
 欢迎您提出宝贵的意见和建议，我的百度ID是：wiki908，我所在的漫画组是：无毒汉化组
 
 本项目网址：https://github.com/wiki908/mteditor
+下载更新：https://github.com/wiki908/mteditor/releases
 
 by wiki908
