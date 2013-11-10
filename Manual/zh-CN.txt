@@ -5,14 +5,15 @@
 
 操作简单易懂，但需要说明几点：
 
-一、当前文件总是会另存，敬请期待后续带有菜单的版本
+一、图片总会另存，文本总会直接保存。敬请期待后续带有菜单的版本
+二、呃……现在只能保存80%品质的jpg格式……_(:з」∠)_
 三、文本在导入时只支持ANSI、有BOM的UTF-8以及Unicode编码，保存时总使用Unicode编码
 
 尽管有这样和那样的不足，但我会继续努力完善这份作品，也希望您能喜欢
 
 欢迎您提出宝贵的意见和建议，我的百度ID是：wiki908，我所在的漫画组是：无毒汉化组
 
-本项目网址：https://github.com/wiki908/mteditor
+项目网址：https://github.com/wiki908/mteditor
 下载更新：https://github.com/wiki908/mteditor/releases
 
 by wiki908

@@ -76,9 +76,7 @@ namespace mteditor
                 bbe.Save(imageBuffer);
 
                 CurrentNumber = int.Parse(tbNumberNext.Text);
-                tbTranslation.Text += addLine(CurrentNumber);
-                tbTranslation.ScrollToEnd();
-
+                TransBoxAppend(addLine(CurrentNumber));
                 ++CurrentNumber;
                 tbNumberNext.Text = string.Format("{0}", CurrentNumber);
             }
@@ -92,10 +90,9 @@ namespace mteditor
 
             sw.Stop();
             IsStatusGood = true;
-            UpdateColorStatus();
-            stStatus.Text = string.Format("已绘制标号 {0} 用时 {1:N0} 毫秒", CurrentNumber - 1, sw.Elapsed.TotalMilliseconds);
             IsImageModified = true;
             UpdateColorStatus();
+            stStatus.Text = string.Format("已绘制标号 {0} 用时 {1:N0} 毫秒", CurrentNumber - 1, sw.Elapsed.TotalMilliseconds);
         }
     }
 }

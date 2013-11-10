@@ -25,6 +25,7 @@ namespace mteditor
         const string OpenImageFilter = "图像文件|*.jpg;*.png;*.bmp;*.gif|所有文件|*";
         const string SaveImageFilter = "JPEG 图像|*.jpg|所有文件|*";
         string CurrentImagePath = "";
+        string CurrentImageName = "";
 
         void OpenImage()
         {
@@ -32,8 +33,14 @@ namespace mteditor
 
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.InitialDirectory = GetDirectory(CurrentImagePath);
+            ofd.FileName = CurrentImageName;
             ofd.Filter = OpenImageFilter;
-            if (ofd.ShowDialog() == true) CurrentImagePath = ofd.FileName;
+
+            if (ofd.ShowDialog() == true)
+            {
+                CurrentImagePath = ofd.FileName;
+                CurrentImageName = ofd.SafeFileName;
+            }
             else return;
 
             sw.Start();
@@ -68,6 +75,8 @@ namespace mteditor
                 stStatus.Text = string.Format("无法打开图像 \"{0}\"", CurrentImagePath);
             }
 
+            TransBoxAppend("\r\n>>> " + CurrentImageName + " <<<\r\n");
+
             sw.Stop();
             IsStatusGood = true;
             UpdateColorStatus();
@@ -89,7 +98,8 @@ namespace mteditor
             if (string.IsNullOrWhiteSpace(sfn))
             {
                 SaveFileDialog sfd = new SaveFileDialog();
-                sfd.InitialDirectory = CurrentImagePath;
+                sfd.InitialDirectory = GetDirectory(CurrentImagePath);
+                sfd.FileName = CurrentImageName;
                 sfd.Filter = SaveImageFilter;
                 if (sfd.ShowDialog() == true) sfn = sfd.FileName;
                 else return false;

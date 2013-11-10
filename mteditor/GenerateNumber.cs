@@ -56,9 +56,8 @@ namespace mteditor
                 {
                     tmp += addLine(i);
                 }
-                tbTranslation.Text += tmp;
-                tbTranslation.ScrollToEnd();
-
+                TransBoxAppend(tmp);
+                
                 sw.Stop();
                 IsStatusGood = true;
                 UpdateColorStatus();

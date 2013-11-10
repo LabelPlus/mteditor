@@ -23,6 +23,7 @@ namespace mteditor
     {
         const string TextFileFilter = "文本文件|*.txt|所有文件|*";
         string CurrentTextPath = "";
+        string CurrentTextName = "";
 
         void OpenText()
         {
@@ -30,6 +31,7 @@ namespace mteditor
 
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.InitialDirectory = GetDirectory(CurrentTextPath);
+            ofd.FileName = CurrentTextName;
             ofd.Filter = TextFileFilter;
             if (ofd.ShowDialog() == true) CurrentTextPath = ofd.FileName;
             else return;
@@ -66,7 +68,8 @@ namespace mteditor
             if (string.IsNullOrWhiteSpace(sfn))
             {
                 SaveFileDialog sfd = new SaveFileDialog();
-                sfd.InitialDirectory = CurrentTextPath;
+                sfd.InitialDirectory = GetDirectory(CurrentTextPath);
+                sfd.FileName = CurrentTextName;
                 sfd.Filter = TextFileFilter;
                 if (sfd.ShowDialog() == true) sfn = sfd.FileName;
                 else return false;

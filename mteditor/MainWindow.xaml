@@ -31,7 +31,7 @@
         </Border>
         <Button x:Name="btnGenerateNumber" Content="生成编号" Click="btnGenerateNumber_Click" HorizontalAlignment="Left" Margin="840,527,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btnOpenImage" Content="打开图片" Click="btnOpenImage_Click" HorizontalAlignment="Left" Margin="522,561,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btnSaveImage" Content="保存图片" Click="btnSaveImage_Click" HorizontalAlignment="Left" Margin="522,589.73,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btnSaveImage" Content="另存图片" Click="btnSaveImage_Click" HorizontalAlignment="Left" Margin="522,589.73,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btnOpenText" Content="打开文本" Click="btnOpenText_Click" HorizontalAlignment="Left" Margin="683,561,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btnSaveText" Content="保存文本" Click="btnSaveText_Click" HorizontalAlignment="Left" Margin="683,589.73,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btnExit" Content="退出" Click="btnExit_Click" HorizontalAlignment="Left" Margin="840,589.73,0,0" VerticalAlignment="Top" Width="75"/>

@@ -7,4 +7,4 @@ Manga Translation Editor (mteditor)
 
 For numbering on images and genarate translation framework.
 
-Ver 1.0 have only Chinese Simplified UI.
+It have only Chinese Simplified UI now.

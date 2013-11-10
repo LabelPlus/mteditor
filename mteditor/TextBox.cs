@@ -30,6 +30,12 @@ namespace mteditor
             UpdateColorStatus();
         }
 
+        private void TransBoxAppend(string str)
+        {
+            tbTranslation.AppendText(str);
+            tbTranslation.CaretIndex = tbTranslation.Text.Length;
+            tbTranslation.ScrollToEnd();
+        }
         /// <summary>
         /// 限定四个文本框只接收数字
         /// </summary>
