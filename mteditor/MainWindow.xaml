@@ -4,39 +4,46 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Name="wdMain" x:Class="mteditor.MainWindow"
         MouseLeftButtonDown="wdMain_MouseLeftButtonDown"  
         Closing="wdMain_Closing"
-        Title="MainWindow" Height="350" Width="525" MinHeight="700" MaxHeight="700" MinWidth="950" MaxWidth="950" FontSize="14.667" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Background="#FF2D3240" BorderThickness="2" AllowsTransparency="True" WindowStyle="None" BorderBrush="Cyan">
+        Title="mteditor" Height="350" Width="525" MinHeight="700" MaxHeight="700" MinWidth="950" MaxWidth="950" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Background="#FF272727" BorderThickness="1" AllowsTransparency="True" WindowStyle="None" BorderBrush="Cyan">
     <Grid>
+        <Border BorderBrush="Lime" BorderThickness="1" HorizontalAlignment="Left" Height="22" Margin="492,10,0,0" VerticalAlignment="Top" Width="446">
+            <Menu HorizontalAlignment="Left" Height="22" Margin="-1" VerticalAlignment="Top" Width="444" Background="{x:Null}" BorderThickness="1" Foreground="#FF0080FF">
+                <MenuItem Header="文件">
+                    <MenuItem Header="图像">
+                        <MenuItem x:Name="miImageOpen" Click="miImageOpen_Click" Header="打开..." />
+                        <MenuItem x:Name="miImageSave" Click="miImageSave_Click" Header="保存..."/>
+                        <MenuItem x:Name="miImageSaveAs" Click="miImageSaveAs_Click" Header="另存为..." />
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="文本">
+                        <MenuItem x:Name="miTextOpen" Click="miTextOpen_Click" Header="打开..." />
+                        <MenuItem x:Name="miTextSave" Click="miTextSave_Click" Header="保存..."  />
+                        <MenuItem x:Name="miTextSaveAs" Click="miTextSaveAs_Click" Header="另存为..."/>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem x:Name="miExit" Click="miExit_Click" Header="退出" />
+                </MenuItem>
+                <MenuItem Header="工具">
+                    <MenuItem x:Name="miGeneNum" Click="miGeneNum_Click" Header="标号生成"/>
+                    <Separator />
+                    <MenuItem x:Name="miSettings" Click="miSettings_Click" Header="选项"/>
+                </MenuItem>
+                <MenuItem Header="帮助">
+                    <MenuItem x:Name="miManual" Click="miManual_Click" Header="使用说明"/>
+                    <Separator />
+                    <MenuItem x:Name="miAbout" Click="miAbout_Click" Header="关于"/>
+                </MenuItem>
+            </Menu>
+        </Border>
         <Border x:Name="bdrImage" BorderBrush="Cyan" BorderThickness="1" HorizontalAlignment="Left" Height="676" Margin="10,10,0,0" VerticalAlignment="Top" Width="477">
             <Image x:Name="imgShow" MouseLeftButtonDown="imgShow_MouseLeftButtonDown"/>
         </Border>
 
-        <Border x:Name="bdrText" BorderBrush="Cyan" BorderThickness="1" HorizontalAlignment="Left" Height="458" Margin="492,10,0,0" VerticalAlignment="Top" Width="444">
-            <TextBox x:Name="tbTranslation" TextChanged="tbTranslation_TextChanged" Text="Translation" Background="{x:Null}" BorderBrush="{x:Null}" CaretBrush="White" Foreground="White" SelectionBrush="#FF1C4FDA" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
+        <Border x:Name="bdrText" BorderBrush="Cyan" BorderThickness="1" HorizontalAlignment="Left" Height="588" Margin="492,37,0,0" VerticalAlignment="Top" Width="446">
+            <TextBox x:Name="tbTranslation" TextChanged="tbTranslation_TextChanged" Background="{x:Null}" BorderBrush="{x:Null}" CaretBrush="White" Foreground="White" SelectionBrush="#FF1C4FDA" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
         </Border>
-        <Label Content="标号大小" HorizontalAlignment="Left" Height="27" Margin="522,485,0,0" VerticalAlignment="Top" Width="69" Background="{x:Null}" Foreground="White"/>
-        <Border BorderBrush="Magenta" BorderThickness="1" HorizontalAlignment="Left" Height="27" Margin="596,485,0,0" VerticalAlignment="Top" Width="113">
-            <TextBox x:Name="tbNumberSize" PreviewTextInput="tbNumberSize_PreviewTextInput" InputMethod.IsInputMethodEnabled="False" TextWrapping="Wrap" Text="0" Background="{x:Null}" BorderBrush="{x:Null}" CaretBrush="White" Foreground="White" SelectionBrush="#FF1C4FDA"/>
-        </Border>
-        <Label Content="下一标号" HorizontalAlignment="Left" Height="27" Margin="728,485,0,0" VerticalAlignment="Top" Width="69" Background="{x:Null}" Foreground="White"/>
-        <Border BorderBrush="Magenta" BorderThickness="1" HorizontalAlignment="Left" Height="27" Margin="802,485,0,0" VerticalAlignment="Top" Width="113">
-            <TextBox x:Name="tbNumberNext" PreviewTextInput="tbNumberNext_PreviewTextInput" InputMethod.IsInputMethodEnabled="False" TextWrapping="Wrap" Text="0" Background="{x:Null}" BorderBrush="{x:Null}" CaretBrush="White" Foreground="White" SelectionBrush="#FF1C4FDA"/>
-        </Border>
-        <Label Content="从" HorizontalAlignment="Left" Height="27" Margin="522,524,0,0" VerticalAlignment="Top" Width="24" Background="{x:Null}" Foreground="White"/>
-        <Border BorderBrush="Magenta" BorderThickness="1" HorizontalAlignment="Left" Height="27" Margin="551,524,0,0" VerticalAlignment="Top" Width="113">
-            <TextBox x:Name="tbGenerateFrom" PreviewTextInput="tbGenerateFrom_PreviewTextInput" InputMethod.IsInputMethodEnabled="False" TextWrapping="Wrap" Text="0" Background="{x:Null}" BorderBrush="{x:Null}" CaretBrush="White" Foreground="White" SelectionBrush="#FF1C4FDA"/>
-        </Border>
-        <Label Content="到" HorizontalAlignment="Left" Height="27" Margin="683,524,0,0" VerticalAlignment="Top" Width="24" Background="{x:Null}" Foreground="White"/>
-        <Border BorderBrush="Magenta" BorderThickness="1" HorizontalAlignment="Left" Height="27" Margin="712,524,0,0" VerticalAlignment="Top" Width="113">
-            <TextBox x:Name="tbGenerateTo" PreviewTextInput="tbGenerateTo_PreviewTextInput" InputMethod.IsInputMethodEnabled="False" TextWrapping="Wrap" Text="0" Background="{x:Null}" BorderBrush="{x:Null}" CaretBrush="White" Foreground="White" SelectionBrush="#FF1C4FDA"/>
-        </Border>
-        <Button x:Name="btnGenerateNumber" Content="生成编号" Click="btnGenerateNumber_Click" HorizontalAlignment="Left" Margin="840,527,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btnOpenImage" Content="打开图片" Click="btnOpenImage_Click" HorizontalAlignment="Left" Margin="522,561,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btnSaveImage" Content="另存图片" Click="btnSaveImage_Click" HorizontalAlignment="Left" Margin="522,589.73,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btnOpenText" Content="打开文本" Click="btnOpenText_Click" HorizontalAlignment="Left" Margin="683,561,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btnSaveText" Content="保存文本" Click="btnSaveText_Click" HorizontalAlignment="Left" Margin="683,589.73,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btnExit" Content="退出" Click="btnExit_Click" HorizontalAlignment="Left" Margin="840,589.73,0,0" VerticalAlignment="Top" Width="75"/>
-        <Border x:Name="bdrStatus" BorderBrush="Lime" BorderThickness="1" HorizontalAlignment="Left" Height="56" Margin="492,630,0,0" VerticalAlignment="Top" Width="444">
-            <TextBlock x:Name="stStatus" TextWrapping="Wrap" Text="Status" Foreground="White" Margin="2"/>
+        <Border x:Name="bdrStatus" BorderBrush="Lime" BorderThickness="1" HorizontalAlignment="Left" Height="56" Margin="492,630,0,0" VerticalAlignment="Top" Width="446">
+            <TextBlock x:Name="stStatus" TextWrapping="Wrap" Foreground="White" Margin="2"/>
         </Border>
     </Grid>
 </Window>

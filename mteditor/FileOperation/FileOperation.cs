@@ -21,11 +21,6 @@ namespace mteditor
 {
     public partial class MainWindow
     {
-        /// <summary>
-        /// 过滤文件名的路径名，请不要试图传入一个路径名
-        /// </summary>
-        /// <param name="FullPath">包含文件名的完整路径</param>
-        /// <returns>去掉安全文件名的路径</returns>
         string GetDirectory(string FullPath)
         {
             if (string.IsNullOrWhiteSpace(FullPath))
@@ -35,15 +30,13 @@ namespace mteditor
             return ret;
         }
 
-        bool IsSaveModifiedFile(string FileName)
+        bool IsSaveModifiedFile(string FilePath)
         {
-            if (string.IsNullOrWhiteSpace(FileName))
-                FileName = "新建文本";
-            string fmt = string.Format("文件 \"{0}\" 已修改，是否保存？", FileName);
-            MessageBoxResult mbr = MessageBox.Show(fmt, "提示", MessageBoxButton.YesNo);
-            if (mbr == MessageBoxResult.Yes) return true;
-            else return false;
+            if (string.IsNullOrWhiteSpace(FilePath))
+                FilePath = "新建文本文件";
+            string msg = string.Format("\"{0}\" 已修改，是否保存？", FilePath);
+            MessageBoxResult mbr = MessageBox.Show(msg, "提示", MessageBoxButton.YesNo);
+            return (mbr == MessageBoxResult.Yes);
         }
-
     }
 }

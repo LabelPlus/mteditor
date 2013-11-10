@@ -28,17 +28,15 @@ namespace mteditor
             int CurrentNumber = 0;
             try
             {
-                int numbersize = int.Parse(tbNumberSize.Text);
-                if(numbersize <= 0 || numbersize > 240)
+                if (NumberSize <= 0 || NumberSize > 240)
                 {
-                    stStatus.Text = NumberSizeError;
+                    stStatus.Text = Utilities.NumberSizeError;
                     IsStatusGood = false;
                     UpdateColorStatus();
                     return;
                 }
 
                 Point p = e.GetPosition(imgShow);
-                //tbTranslation.Text += string.Format("\r\nX: {0}\r\nY: {1}\r\n", p.X, p.Y);
                 imageBuffer.Seek(0, SeekOrigin.Begin);
 
                 BitmapImage bi = new BitmapImage();
@@ -48,17 +46,17 @@ namespace mteditor
                 bi.EndInit();
 
                 FormattedText txt = new FormattedText(
-                    tbNumberNext.Text,
+                    NextNumber.ToString(),
                     new CultureInfo("zh-cn"),
                     FlowDirection.LeftToRight,
                     new Typeface("Arial"),
-                    numbersize,
+                    NumberSize,
                     Brushes.Red);
 
                 DrawingVisual drawingVisual = new DrawingVisual();
 
-                double DrawX = p.X * bi.PixelWidth / imgShow.ActualWidth - numbersize / 2;
-                double DrawY = p.Y * bi.PixelHeight / imgShow.ActualHeight - numbersize / 2;
+                double DrawX = p.X * bi.PixelWidth / imgShow.ActualWidth - NumberSize / 2;
+                double DrawY = p.Y * bi.PixelHeight / imgShow.ActualHeight - NumberSize / 2;
 
                 using (DrawingContext drawingContext = drawingVisual.RenderOpen())
                 {
@@ -75,10 +73,8 @@ namespace mteditor
                 bbe.Frames.Add(BitmapFrame.Create(rtb));
                 bbe.Save(imageBuffer);
 
-                CurrentNumber = int.Parse(tbNumberNext.Text);
-                TransBoxAppend(addLine(CurrentNumber));
-                ++CurrentNumber;
-                tbNumberNext.Text = string.Format("{0}", CurrentNumber);
+                TransBoxAppend(Utilities.addLine((int)NextNumber));
+                ++NextNumber;
             }
             catch
             {

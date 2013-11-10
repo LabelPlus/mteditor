@@ -28,16 +28,19 @@ namespace mteditor
         {
             try
             {
-                if (IsStatusGood) bdrStatus.BorderBrush = new SolidColorBrush(Color.FromRgb(0x00, 0xFF, 0x00));
-                else bdrStatus.BorderBrush = new SolidColorBrush(Color.FromRgb(0xFF, 0x00, 0x00));
-                if (IsImageModified) bdrImage.BorderBrush = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0x00));
-                else bdrImage.BorderBrush = new SolidColorBrush(Color.FromRgb(0x00, 0xFF, 0xFF));
-                if (IsTextModified) bdrText.BorderBrush = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0x00));
-                else bdrText.BorderBrush = new SolidColorBrush(Color.FromRgb(0x00, 0xFF, 0xFF));
+                if (IsStatusGood) Utilities.SetBorderColor(ref bdrStatus, 0x00, 0xFF, 0x00);
+                else Utilities.SetBorderColor(ref bdrStatus, 0xFF, 0x00, 0x00);
+                if (IsImageModified) Utilities.SetBorderColor(ref bdrImage,0xFF, 0xFF, 0x00);
+                else Utilities.SetBorderColor(ref bdrImage,0x00, 0xFF, 0xFF);
+                if (IsTextModified) Utilities.SetBorderColor(ref bdrText,0xFF, 0xFF, 0x00);
+                else Utilities.SetBorderColor(ref bdrText,0x00, 0xFF, 0xFF);
                 if (IsImageModified || IsTextModified) wdMain.BorderBrush = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0x00));
                 else wdMain.BorderBrush = new SolidColorBrush(Color.FromRgb(0x00, 0xFF, 0xFF));
             }
             catch { }
         }
+
+        public uint NextNumber { get; set; }
+        public uint NumberSize { get; set; }
     }
 }

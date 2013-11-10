@@ -84,7 +84,7 @@ namespace mteditor
             IsImageModified = false;
             UpdateColorStatus();
         }
-        bool SaveImage()
+        bool SaveImage(bool isSaveAs)
         {
             if (!IsImageModified)
                 return false;
@@ -159,15 +159,20 @@ namespace mteditor
 
             return true;
         }
-        private void btnOpenImage_Click(object sender, RoutedEventArgs e)
+        private void miImageOpen_Click(object sender, RoutedEventArgs e)
         {
-            if (IsImageModified && IsSaveModifiedFile(CurrentImagePath) && SaveImage()) { }
+            if (IsImageModified && IsSaveModifiedFile(CurrentImagePath) && SaveImage(false)) { }
             OpenImage();
         }
-        private void btnSaveImage_Click(object sender, RoutedEventArgs e)
+
+        private void miImageSave_Click(object sender, RoutedEventArgs e)
         {
-            SaveImage();
+
         }
 
+        private void miImageSaveAs_Click(object sender, RoutedEventArgs e)
+        {
+            SaveImage(true);
+        }
     }
 }

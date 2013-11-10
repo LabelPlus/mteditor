@@ -59,7 +59,7 @@ namespace mteditor
             IsTextModified = false;
             UpdateColorStatus();
         }
-        bool SaveText()
+        bool SaveText(bool isSaveAs)
         {
             Stopwatch sw = new Stopwatch();
 
@@ -102,14 +102,21 @@ namespace mteditor
 
             return true;
         }
-        private void btnOpenText_Click(object sender, RoutedEventArgs e)
+        private void miTextOpen_Click(object sender, RoutedEventArgs e)
         {
-            if (IsTextModified && IsSaveModifiedFile(CurrentTextPath) && SaveText()) { }
+            if (IsTextModified && IsSaveModifiedFile(CurrentTextPath) && SaveText(false)) { }
             OpenText();
         }
-        private void btnSaveText_Click(object sender, RoutedEventArgs e)
+
+        private void miTextSave_Click(object sender, RoutedEventArgs e)
         {
-            SaveText();
+            SaveText(false);
         }
+
+        private void miTextSaveAs_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }
