@@ -81,6 +81,13 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="FileOperation.cs" />
+    <Compile Include="GenerateNumber.cs" />
+    <Compile Include="ImageEdit.cs" />
+    <Compile Include="ImageFile.cs" />
+    <Compile Include="Status.cs" />
+    <Compile Include="TextBox.cs" />
+    <Compile Include="TextFile.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
