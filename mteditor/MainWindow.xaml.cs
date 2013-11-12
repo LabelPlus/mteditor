@@ -33,6 +33,28 @@ namespace mteditor
             IsStatusGood = true;
             NextNumber = 1;
             NumberSize = 24;
+            this.Width = 640;
+            this.Height = 480;
+
+            #region
+            bdrImage.HorizontalAlignment = HorizontalAlignment.Left;
+            bdrImage.VerticalAlignment = VerticalAlignment.Top;
+            bdrImage.Margin = new Thickness(10, 10, 0, 0);
+
+            bdrMenu.HorizontalAlignment = HorizontalAlignment.Right;
+            bdrMenu.VerticalAlignment = VerticalAlignment.Top;
+            bdrMenu.Margin = new Thickness(0, 10, 10, 0);
+
+            bdrStatus.HorizontalAlignment = HorizontalAlignment.Right;
+            bdrStatus.VerticalAlignment = VerticalAlignment.Bottom;
+            bdrStatus.Margin = new Thickness(0, 0, 10, 10);
+
+            bdrText.HorizontalAlignment = HorizontalAlignment.Right;
+            bdrText.VerticalAlignment = VerticalAlignment.Top;
+            bdrText.Margin = new Thickness(0, 36, 10, 0);
+
+            #endregion
+
             UpdateColorStatus();
         }
         private void wdMain_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -50,6 +72,44 @@ namespace mteditor
         private void miExit_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void wdMain_Activated(object sender, EventArgs e)
+        {
+            //IsActivated = true;
+            //TransBoxAppend("Activated\n");
+        }
+
+        private void wdMain_Deactivated(object sender, EventArgs e)
+        {
+            IsActivated = false;
+            //TransBoxAppend("Deactivated\n");
+        }
+
+        double portableWidth(double w)
+        {
+            if (w < 120) return 120;
+            else return w;
+        }
+        private void wdMain_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            double h = grid.ActualHeight - 20;
+            double w = grid.ActualWidth - 20;
+
+            double imgw = h * 7 / 10;
+            w = w - imgw - 2;
+
+            bdrImage.Height = h;
+            bdrImage.Width = imgw;
+
+            bdrMenu.Height = 24;
+            bdrMenu.Width = portableWidth(w);
+
+            bdrStatus.Height = 50;
+            bdrStatus.Width = portableWidth(w);
+
+            bdrText.Height = h - 24 - 2 - 50 - 2;
+            bdrText.Width = portableWidth(w);
         }
     }
 }

@@ -23,9 +23,15 @@ namespace mteditor
     {
         private void imgShow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (!IsActivated)
+            {
+                IsActivated = true;
+                return;
+            }
+
             Stopwatch sw = new Stopwatch();
             sw.Start();
-            int CurrentNumber = 0;
+
             try
             {
                 if (NumberSize <= 0 || NumberSize > 240)
@@ -88,7 +94,7 @@ namespace mteditor
             IsStatusGood = true;
             IsImageModified = true;
             UpdateColorStatus();
-            stStatus.Text = string.Format("已绘制标号 {0} 用时 {1:N0} 毫秒", CurrentNumber - 1, sw.Elapsed.TotalMilliseconds);
+            stStatus.Text = string.Format("已绘制标号 {0} 用时 {1:N0} 毫秒", NextNumber - 1, sw.Elapsed.TotalMilliseconds);
         }
     }
 }

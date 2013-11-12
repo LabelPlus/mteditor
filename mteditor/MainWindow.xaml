@@ -1,13 +1,26 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Name="wdMain" x:Class="mteditor.MainWindow"
-        MouseLeftButtonDown="wdMain_MouseLeftButtonDown"  
-        Closing="wdMain_Closing"
-        Title="mteditor" Height="350" Width="525" MinHeight="700" MaxHeight="700" MinWidth="950" MaxWidth="950" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Background="#FF272727" BorderThickness="1" AllowsTransparency="True" WindowStyle="None" BorderBrush="Cyan">
-    <Grid>
-        <Border BorderBrush="Lime" BorderThickness="1" HorizontalAlignment="Left" Height="22" Margin="492,10,0,0" VerticalAlignment="Top" Width="446">
-            <Menu HorizontalAlignment="Left" Height="22" Margin="-1" VerticalAlignment="Top" Width="444" Background="{x:Null}" BorderThickness="1" Foreground="#FF0080FF">
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d" 
+    x:Name="wdMain" 
+    x:Class="mteditor.MainWindow"
+    Closing="wdMain_Closing" 
+    Activated="wdMain_Activated" 
+    Deactivated="wdMain_Deactivated" 
+    SizeChanged="wdMain_SizeChanged"
+    Title="mteditor" 
+    MinHeight="240" MinWidth="320" 
+    WindowStartupLocation="CenterScreen" 
+    BorderThickness="2" BorderBrush="Blue">
+
+    <Grid x:Name="grid">
+        <Border x:Name="bdrImage" BorderBrush="Blue" BorderThickness="1">
+            <Image x:Name="imgShow" MouseLeftButtonDown="imgShow_MouseLeftButtonDown"/>
+        </Border>
+        <Border x:Name="bdrMenu" BorderBrush="#FF00CC00" BorderThickness="1">
+            <Menu HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}" BorderThickness="1">
                 <MenuItem Header="文件">
                     <MenuItem Header="图像">
                         <MenuItem x:Name="miImageOpen" Click="miImageOpen_Click" Header="打开..." />
@@ -35,15 +48,12 @@
                 </MenuItem>
             </Menu>
         </Border>
-        <Border x:Name="bdrImage" BorderBrush="Cyan" BorderThickness="1" HorizontalAlignment="Left" Height="676" Margin="10,10,0,0" VerticalAlignment="Top" Width="477">
-            <Image x:Name="imgShow" MouseLeftButtonDown="imgShow_MouseLeftButtonDown"/>
-        </Border>
 
-        <Border x:Name="bdrText" BorderBrush="Cyan" BorderThickness="1" HorizontalAlignment="Left" Height="588" Margin="492,37,0,0" VerticalAlignment="Top" Width="446">
-            <TextBox x:Name="tbTranslation" TextChanged="tbTranslation_TextChanged" Background="{x:Null}" BorderBrush="{x:Null}" CaretBrush="White" Foreground="White" SelectionBrush="#FF1C4FDA" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
+        <Border x:Name="bdrText" BorderBrush="Blue" BorderThickness="1">
+            <TextBox x:Name="tbTranslation" TextChanged="tbTranslation_TextChanged" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="#FF1C4FDA" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
         </Border>
-        <Border x:Name="bdrStatus" BorderBrush="Lime" BorderThickness="1" HorizontalAlignment="Left" Height="56" Margin="492,630,0,0" VerticalAlignment="Top" Width="446">
-            <TextBlock x:Name="stStatus" TextWrapping="Wrap" Foreground="White" Margin="2"/>
+        <Border x:Name="bdrStatus" BorderBrush="Lime" BorderThickness="1">
+            <TextBlock x:Name="stStatus" TextWrapping="Wrap"/>
         </Border>
     </Grid>
 </Window>
