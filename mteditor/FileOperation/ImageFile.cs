@@ -77,6 +77,9 @@ namespace mteditor
 
             TransBoxAppend("\r\n>>> " + CurrentImageName + " <<<\r\n");
 
+            IsActivated = true;
+            if (AutoResetNumber) NextNumber = 1;
+
             sw.Stop();
             IsStatusGood = true;
             UpdateColorStatus();

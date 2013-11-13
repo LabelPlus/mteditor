@@ -93,6 +93,8 @@ namespace mteditor
                 return false;
             }
 
+            IsActivated = true;
+
             sw.Stop();
             IsStatusGood = true;
             UpdateColorStatus();

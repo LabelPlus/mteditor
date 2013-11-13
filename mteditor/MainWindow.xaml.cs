@@ -32,7 +32,7 @@ namespace mteditor
             IsTextModified = false;
             IsStatusGood = true;
             NextNumber = 1;
-            NumberSize = 24;
+            NumberSize = 48;
             this.Width = 640;
             this.Height = 480;
 

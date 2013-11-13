@@ -32,5 +32,10 @@ namespace mteditor
         {
             this.DragMove();
         }
+
+        private void wdAbout_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            (this.Owner as MainWindow).IsActivated = true;
+        }
     }
 }

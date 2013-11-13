@@ -31,6 +31,7 @@ namespace mteditor
             pntWindow = (this.Owner as MainWindow);
             tbNumberSize.Text = pntWindow.NumberSize.ToString();
             tbNumberNext.Text = pntWindow.NextNumber.ToString();
+            cbResetNumber.IsChecked = pntWindow.AutoResetNumber;
         }
         private void tbNumberSize_Pasting(object sender, DataObjectPastingEventArgs e)
         {
@@ -75,6 +76,7 @@ namespace mteditor
             {
                 pntWindow.NumberSize = uint.Parse(tbNumberSize.Text);
                 pntWindow.NextNumber = uint.Parse(tbNumberNext.Text);
+                pntWindow.AutoResetNumber = cbResetNumber.IsChecked.Value;
                 this.Close();
             }
             catch
@@ -86,6 +88,11 @@ namespace mteditor
         private void wdSettings_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
+        }
+
+        private void wdSettings_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            (this.Owner as MainWindow).IsActivated = true;
         }
     }
 }

@@ -24,7 +24,9 @@ namespace mteditor
         bool IsImageModified = false;
         bool IsTextModified = false;
         bool IsStatusGood = true;
-        bool IsActivated { get; set; }
+        public bool IsActivated { get; set; }
+        public bool AutoResetNumber { get; set; }
+
         void UpdateColorStatus()
         {
             try
