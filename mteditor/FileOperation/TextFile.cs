@@ -49,13 +49,17 @@ namespace mteditor
             {
                 IsStatusGood = false;
                 UpdateColorStatus();
-                stStatus.Text = string.Format("无法打开文本 \"{0}\"", CurrentTextPath);
+                stStatus.AppendText(string.Format("无法打开文本 \"{0}\"\n", CurrentTextPath));
+                stStatus.ScrollToEnd();
+                stStatus.CaretIndex = stStatus.Text.Length;
             }
 
             sw.Stop();
             IsStatusGood = true;
             UpdateColorStatus();
-            stStatus.Text = string.Format("已打开文本 \"{0}\" 用时 {1:N0} 毫秒", CurrentTextPath, sw.Elapsed.TotalMilliseconds);
+            stStatus.AppendText(string.Format("已打开文本 \"{0}\" 用时 {1:N0} 毫秒\n", CurrentTextPath, sw.Elapsed.TotalMilliseconds));
+            stStatus.ScrollToEnd();
+            stStatus.CaretIndex = stStatus.Text.Length;
             IsTextModified = false;
             UpdateColorStatus();
         }
@@ -89,7 +93,9 @@ namespace mteditor
             {
                 IsStatusGood = false;
                 UpdateColorStatus();
-                stStatus.Text = string.Format("无法保存文本 \"{0}\"", sfn);
+                stStatus.AppendText(string.Format("无法保存文本 \"{0}\"\n", sfn));
+                stStatus.ScrollToEnd();
+                stStatus.CaretIndex = stStatus.Text.Length;
                 return false;
             }
 
@@ -98,7 +104,9 @@ namespace mteditor
             sw.Stop();
             IsStatusGood = true;
             UpdateColorStatus();
-            stStatus.Text = string.Format("已保存文本 \"{0}\" 用时 {1:N0} 毫秒", sfn, sw.Elapsed.TotalMilliseconds);
+            stStatus.AppendText(string.Format("已保存文本 \"{0}\" 用时 {1:N0} 毫秒\n", sfn, sw.Elapsed.TotalMilliseconds));
+            stStatus.ScrollToEnd();
+            stStatus.CaretIndex = stStatus.Text.Length;
             IsTextModified = false;
             UpdateColorStatus();
 

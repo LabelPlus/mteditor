@@ -74,7 +74,13 @@ namespace mteditor
         {
             try
             {
-                pntWindow.NumberSize = uint.Parse(tbNumberSize.Text);
+                uint num = uint.Parse(tbNumberSize.Text);
+                if(num <= 0 || num > 240)
+                {
+                    Utilities.SetBorderColor(ref bdrNumSize, 0xFF, 0x00, 0x00);
+                    return;
+                }
+                pntWindow.NumberSize = num;
                 pntWindow.NextNumber = uint.Parse(tbNumberNext.Text);
                 pntWindow.AutoResetNumber = cbResetNumber.IsChecked.Value;
                 this.Close();

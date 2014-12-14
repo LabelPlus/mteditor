@@ -34,13 +34,13 @@ namespace mteditor
 
             try
             {
-                if (NumberSize <= 0 || NumberSize > 240)
-                {
-                    stStatus.Text = Utilities.NumberSizeError;
-                    IsStatusGood = false;
-                    UpdateColorStatus();
-                    return;
-                }
+                //if (NumberSize <= 0 || NumberSize > 240)
+                //{
+                //    stStatus.AppendText(Utilities.NumberSizeError;
+                //    IsStatusGood = false;
+                //    UpdateColorStatus();
+                //    return;
+                //}
 
                 Point p = e.GetPosition(imgShow);
                 imageBuffer.Seek(0, SeekOrigin.Begin);
@@ -86,7 +86,9 @@ namespace mteditor
             {
                 IsStatusGood = false;
                 UpdateColorStatus();
-                stStatus.Text = string.Format("无法绘制标号");
+                stStatus.AppendText(string.Format("无法绘制标号\n"));
+                stStatus.ScrollToEnd();
+                stStatus.CaretIndex = stStatus.Text.Length;
                 return;
             }
 
@@ -94,7 +96,9 @@ namespace mteditor
             IsStatusGood = true;
             IsImageModified = true;
             UpdateColorStatus();
-            stStatus.Text = string.Format("已绘制标号 {0} 用时 {1:N0} 毫秒", NextNumber - 1, sw.Elapsed.TotalMilliseconds);
+            stStatus.AppendText(string.Format("已绘制标号 {0} 用时 {1:N0} 毫秒\n", NextNumber - 1, sw.Elapsed.TotalMilliseconds));
+            stStatus.ScrollToEnd();
+            stStatus.CaretIndex = stStatus.Text.Length;
         }
     }
 }

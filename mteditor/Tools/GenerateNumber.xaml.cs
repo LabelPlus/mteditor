@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿
 
-using System.IO;
-using Microsoft.Win32;
+using System.Windows;
+using System.Windows.Input;
+using System.Threading;
+using System.Windows.Threading;
+using System.Threading.Tasks;
+
 using System.Diagnostics;
-using System.Globalization;
 
 namespace mteditor
 {
@@ -69,42 +60,70 @@ namespace mteditor
         }
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            if (isGenStrBusy)
+            {
+                isGenStrBusy = false;
+                btnClose.Content = "关闭";
+                pbProgress.Value = 0;
+                stGenStatus.Text = "";
+            }
+            else
+            {
+                this.Close();
+            }
         }
+
+        private delegate void GenStrDele();
+        private int start = 0;
+        private int end = 0;
+        private int i = 0;
+
         private void btnGenerate_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                Stopwatch sw = new Stopwatch();
-                sw.Start();
+                pbProgress.Value = 0;
 
-                int start = int.Parse(tbGenerateFrom.Text);
-                int end = int.Parse(tbGenerateTo.Text);
+                start = int.Parse(tbGenerateFrom.Text);
+                end = int.Parse(tbGenerateTo.Text);
 
-                if ((end - start + 1) > 20000)
-                {
-                    stGenStatus.Text = Utilities.GeneLengthError;
-                    Utilities.SetBorderColor(ref bdrGenStatus, 0xFF, 0x00, 0x00);
-                    return;
-                }
+                //if ((end - start + 1) > 20000)
+                //{
+                //    stGenStatus.Text = Utilities.GeneLengthError;
+                //    Utilities.SetBorderColor(ref bdrGenStatus, 0xFF, 0x00, 0x00);
+                //    return;
+                //}
 
-                string tmp = "";
-                int count = 0;
-
-                for (int i = start; i <= end; ++i, ++count)
-                {
-                    tmp += Utilities.addLine(i);
-                }
-                pntWindow.TransBoxAppend(tmp);
-
-                sw.Stop();
+                i = start - 1;
+                btnClose.Content = "停止";
+                isGenStrBusy = true;
                 Utilities.SetBorderColor(ref bdrGenStatus, 0x00, 0xFF, 0xFF);
-                stGenStatus.Text = string.Format("共生成了 {0:N0} 个编号，用时 {1:N0} 毫秒", count, sw.Elapsed.TotalMilliseconds);
+                Dispatcher.BeginInvoke(DispatcherPriority.Normal, new GenStrDele(GenStr));
+
             }
             catch
             {
                 Utilities.SetBorderColor(ref bdrGenStatus, 0xFF, 0x00, 0x00);
                 stGenStatus.Text = string.Format("编号生成失败");
+            }
+        }
+
+        public bool isGenStrBusy = false;
+        private void GenStr()
+        {
+            ++i;
+            if (i <= end && isGenStrBusy)
+            {
+                pntWindow.TransBoxAppend(Utilities.addLine(i));
+                double val = ((double)i - (double)start) / ((double)end - (double)start) * 100;
+                pbProgress.Value = val;
+                stGenStatus.Text = string.Format("{0,6:0.00}%", val);
+                Dispatcher.BeginInvoke(DispatcherPriority.SystemIdle, new GenStrDele(GenStr));
+            }
+            else
+            {
+                isGenStrBusy = false;
+                btnClose.Content = "关闭";
             }
         }
 

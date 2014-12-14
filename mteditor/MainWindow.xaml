@@ -10,7 +10,7 @@
     Activated="wdMain_Activated" 
     Deactivated="wdMain_Deactivated" 
     SizeChanged="wdMain_SizeChanged"
-    Title="mteditor" 
+    Title="mtx" 
     MinHeight="240" MinWidth="320" 
     WindowStartupLocation="CenterScreen" 
     BorderThickness="2" BorderBrush="Blue">
@@ -53,7 +53,7 @@
             <TextBox x:Name="tbTranslation" TextChanged="tbTranslation_TextChanged" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="#FF1C4FDA" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
         </Border>
         <Border x:Name="bdrStatus" BorderBrush="Lime" BorderThickness="1">
-            <TextBlock x:Name="stStatus" TextWrapping="Wrap"/>
+            <TextBox x:Name="stStatus" TextWrapping="Wrap" FontFamily="SimSun" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
         </Border>
     </Grid>
 </Window>

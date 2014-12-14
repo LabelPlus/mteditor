@@ -14,8 +14,14 @@
         <Label Content="到" HorizontalAlignment="Left" Margin="60,104,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White"/>
         <Button x:Name="btnGenerate" Click="btnGenerate_Click" Content="生成" HorizontalAlignment="Left" Margin="335,268,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btnClose" Click="btnClose_Click" Content="关闭" HorizontalAlignment="Left" Margin="415,268,0,0" VerticalAlignment="Top" Width="75"/>
+        <Border x:Name="bdrGenProgress" BorderThickness="1" Height="22" HorizontalAlignment="Left" Margin="10,268,0,0" VerticalAlignment="Top" Width="320" RenderTransformOrigin="0.5,0.5">
+            <Border.RenderTransform>
+                <RotateTransform Angle="180"/>
+            </Border.RenderTransform>
+            <ProgressBar x:Name="pbProgress" Value="0" Background="{x:Null}" Foreground="#4C00FF00" BorderBrush="{x:Null}"/>
+        </Border>
         <Border x:Name="bdrGenStatus" BorderBrush="#FF00FFFF" BorderThickness="1" HorizontalAlignment="Left" Height="22" Margin="10,268,0,0" VerticalAlignment="Top" Width="320">
-            <TextBlock x:Name="stGenStatus" TextWrapping="Wrap"/>
+            <TextBlock x:Name="stGenStatus" TextWrapping="Wrap" FontFamily="Consolas"/>
         </Border>
     </Grid>
 </Window>
