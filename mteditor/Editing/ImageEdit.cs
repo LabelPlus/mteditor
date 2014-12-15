@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿
+
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
+using System.Windows.Threading;
 
 using System.IO;
 using Microsoft.Win32;
@@ -21,19 +16,17 @@ namespace mteditor
 {
     public partial class MainWindow
     {
-        private void imgShow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (!IsActivated)
-            {
-                IsActivated = true;
-                return;
-            }
+        delegate void draw_dele();
+        MouseButtonEventArgs g_e;
 
+        void draw()
+        {
             Stopwatch sw = new Stopwatch();
             sw.Start();
 
             try
             {
+
                 //if (NumberSize <= 0 || NumberSize > 240)
                 //{
                 //    stStatus.AppendText(Utilities.NumberSizeError;
@@ -42,7 +35,7 @@ namespace mteditor
                 //    return;
                 //}
 
-                Point p = e.GetPosition(imgShow);
+                Point p = g_e.GetPosition(imgShow);
                 imageBuffer.Seek(0, SeekOrigin.Begin);
 
                 BitmapImage bi = new BitmapImage();
@@ -79,8 +72,8 @@ namespace mteditor
                 bbe.Frames.Add(BitmapFrame.Create(rtb));
                 bbe.Save(imageBuffer);
 
-                TransBoxAppend(Utilities.addLine((int)NextNumber));
-                ++NextNumber;
+                TransBoxAppend(Utilities.addLine((int)NextNumber++));
+                //++NextNumber;
             }
             catch
             {
@@ -99,6 +92,18 @@ namespace mteditor
             stStatus.AppendText(string.Format("已绘制标号 {0} 用时 {1:N0} 毫秒\n", NextNumber - 1, sw.Elapsed.TotalMilliseconds));
             stStatus.ScrollToEnd();
             stStatus.CaretIndex = stStatus.Text.Length;
+        }
+        private void imgShow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!IsActivated)
+            {
+                IsActivated = true;
+                return;
+            }
+
+            g_e = e;
+
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, new draw_dele(this.draw));
         }
     }
 }

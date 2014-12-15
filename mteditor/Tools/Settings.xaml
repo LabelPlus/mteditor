@@ -12,7 +12,7 @@
             <TextBox x:Name="tbNumberNext" PreviewTextInput="tbNumberNext_PreviewTextInput"  TextWrapping="Wrap" Background="{x:Null}" Foreground="White" SelectionBrush="#FF81C0FF" BorderBrush="{x:Null}"/>
         </Border>
         <Label Content="下一标号" HorizontalAlignment="Left" Margin="60,104,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White"/>
-        <CheckBox x:Name="cbResetNumber" Content="打开新图像后重置标号" HorizontalAlignment="Left" Margin="127,161,0,0" VerticalAlignment="Top" Foreground="White" Background="{x:Null}"/>
+        <CheckBox x:Name="cbResetNumber" Content="打开新图像后重置标号" HorizontalAlignment="Left" Margin="127,161,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="Cyan" IsChecked="True" Foreground="White"/>
         <Button x:Name="btnOK" Click="btnOK_Click" Content="确定" HorizontalAlignment="Left" Margin="335,268,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btnCancel" Click="btnCancel_Click" Content="取消" HorizontalAlignment="Left" Margin="415,268,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>

@@ -23,5 +23,6 @@
         <Border x:Name="bdrGenStatus" BorderBrush="#FF00FFFF" BorderThickness="1" HorizontalAlignment="Left" Height="22" Margin="10,268,0,0" VerticalAlignment="Top" Width="320">
             <TextBlock x:Name="stGenStatus" TextWrapping="Wrap" FontFamily="Consolas"/>
         </Border>
+        <CheckBox x:Name="cbContinue" Content="可重启模式" HorizontalAlignment="Left" Margin="127,161,0,0" VerticalAlignment="Top" Foreground="White" Background="{x:Null}" BorderBrush="Cyan"/>
     </Grid>
 </Window>
