@@ -35,5 +35,19 @@ namespace mteditor
             tbTranslation.CaretIndex = tbTranslation.Text.Length;
             tbTranslation.ScrollToEnd();
         }
+
+        public void StaticBoxAppend(string str)
+        {
+            stStatus.AppendText(str);
+            stStatus.CaretIndex = stStatus.Text.Length;
+            stStatus.ScrollToEnd();
+        }
+        
+        public void StaticBoxAppend(string str, params object[] args)
+        {
+            stStatus.AppendText(string.Format(str, args));
+            stStatus.CaretIndex = stStatus.Text.Length;
+            stStatus.ScrollToEnd();
+        }
     }
 }

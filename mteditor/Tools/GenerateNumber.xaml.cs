@@ -13,9 +13,11 @@ namespace mteditor
     public partial class GenerateNumber : Window
     {
         delegate void GenStrDele();
+
         int start = 0;
         int end = 0;
         int i = 0;
+        int insidx = 0;
         string gen_s;
         public bool isGenStrBusy = false;
 
@@ -30,26 +32,45 @@ namespace mteditor
             Utilities.SetBorderColor(ref bdrGenStatus, 0x00, 0xFF, 0xFF);
             btnClose.Content = "停止";
             isGenStrBusy = true;
+            cbCurrent.IsEnabled = false;
+            cbContinue.IsEnabled = false;
+            btnGenerate.IsEnabled = false;
 
             start = int.Parse(tbGenerateFrom.Text);
             end = int.Parse(tbGenerateTo.Text);
             i = start - 1;
+
+            if (cbCurrent.IsChecked == true)
+                pntWindow.StaticBoxAppend("稍后将在位置 {0:N0} 插入, 此时你可以修改光标后边的内容\n", insidx = pntWindow.tbTranslation.CaretIndex);
 
             pbProgress.Value = 0;
             sw.Start();
         }
         void EndGen()
         {
-            sw.Stop();
-
             isGenStrBusy = false;
+            if (cbCurrent.IsChecked == true)
+            {
+                pntWindow.tbTranslation.Text = pntWindow.tbTranslation.Text.Insert(insidx, gen_s);
+                pntWindow.tbTranslation.CaretIndex = pntWindow.tbTranslation.Text.Length;
+                insidx = 0;
+            }
+            else
+            {
+                pntWindow.TransBoxAppend(gen_s);
+            }
+
+            sw.Stop();
+            pntWindow.StaticBoxAppend("已生成列表从 {0:N0} 到 {1:N0}, 用时 {2:0.000} 秒\n", start, i-1, sw.Elapsed.TotalSeconds);
+
+            gen_s = "";
             btnClose.Content = "关闭";
+            cbCurrent.IsEnabled = true;
+            cbContinue.IsEnabled = true;
+            btnGenerate.IsEnabled = true;
 
             if (cbContinue.IsChecked == true)
                 tbGenerateFrom.Text = i.ToString();
-
-            pntWindow.TransBoxAppend(gen_s);
-            gen_s = "";
         }
         void btnClose_Click(object sender, RoutedEventArgs e)
         {
@@ -62,9 +83,8 @@ namespace mteditor
         {
             try
             {
-                if (isGenStrBusy) return;
                 StartGen();
-                Dispatcher.BeginInvoke(DispatcherPriority.Normal, new GenStrDele(GenStr));
+                Dispatcher.BeginInvoke(DispatcherPriority.Normal, new GenStrDele(GenStr));               
             }
             catch
             {
@@ -73,16 +93,18 @@ namespace mteditor
                 pbProgress.Value = 0;
             }
         }
+
         void GenStr()
         {
             if (++i <= end && isGenStrBusy)
             {
                 gen_s += Utilities.addLine(i);
+
                 double val = ((double)i - (double)start) / ((double)end - (double)start) * 100;
                 pbProgress.Value = val;
-
                 stGenStatus.Text = string.Format("{0,6:0.00}% {1,8:0.000}", val, sw.Elapsed.TotalSeconds);
-                Dispatcher.BeginInvoke(DispatcherPriority.SystemIdle, new GenStrDele(GenStr));
+
+                Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new GenStrDele(GenStr));
             }
             else
             {

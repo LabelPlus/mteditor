@@ -79,9 +79,7 @@ namespace mteditor
             {
                 IsStatusGood = false;
                 UpdateColorStatus();
-                stStatus.AppendText(string.Format("无法绘制标号\n"));
-                stStatus.ScrollToEnd();
-                stStatus.CaretIndex = stStatus.Text.Length;
+                StaticBoxAppend("无法绘制标号\n");
                 return;
             }
 
@@ -89,9 +87,7 @@ namespace mteditor
             IsStatusGood = true;
             IsImageModified = true;
             UpdateColorStatus();
-            stStatus.AppendText(string.Format("已绘制标号 {0} 用时 {1:N0} 毫秒\n", NextNumber - 1, sw.Elapsed.TotalMilliseconds));
-            stStatus.ScrollToEnd();
-            stStatus.CaretIndex = stStatus.Text.Length;
+            StaticBoxAppend("已绘制标号 {0} 用时 {1:N0} 毫秒\n", NextNumber - 1, sw.Elapsed.TotalMilliseconds);
         }
         private void imgShow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

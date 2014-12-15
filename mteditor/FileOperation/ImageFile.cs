@@ -72,9 +72,7 @@ namespace mteditor
             {
                 IsStatusGood = false;
                 UpdateColorStatus();
-                stStatus.AppendText(string.Format("无法打开图像 \"{0}\"\n", CurrentImagePath));
-                stStatus.ScrollToEnd();
-                stStatus.CaretIndex = stStatus.Text.Length;
+                StaticBoxAppend("无法打开图像 \"{0}\"\n", CurrentImagePath);
             }
 
             TransBoxAppend("\r\n>>> " + CurrentImageName + " <<<\r\n");
@@ -85,9 +83,7 @@ namespace mteditor
             sw.Stop();
             IsStatusGood = true;
             UpdateColorStatus();
-            stStatus.AppendText(string.Format("已打开图像 \"{0}\" 用时 {1:N0} 毫秒\n", CurrentImagePath, sw.Elapsed.TotalMilliseconds));
-            stStatus.ScrollToEnd();
-            stStatus.CaretIndex = stStatus.Text.Length;
+            StaticBoxAppend("已打开图像 \"{0}\" 用时 {1:N0} 毫秒\n", CurrentImagePath, sw.Elapsed.TotalMilliseconds);
             IsImageModified = false;
             UpdateColorStatus();
         }
@@ -153,18 +149,14 @@ namespace mteditor
             {
                 IsStatusGood = false;
                 UpdateColorStatus();
-                stStatus.AppendText(string.Format("无法保存图像 \"{0}\"\n", sfn));
-                stStatus.ScrollToEnd();
-                stStatus.CaretIndex = stStatus.Text.Length;
+                StaticBoxAppend("无法保存图像 \"{0}\"\n", sfn);
                 return false;
             }
 
             sw.Stop();
             IsStatusGood = true;
             UpdateColorStatus();
-            stStatus.AppendText(string.Format("已保存图像 \"{0}\" 用时 {1:N0} 毫秒\n", sfn, sw.Elapsed.TotalMilliseconds));
-            stStatus.ScrollToEnd();
-            stStatus.CaretIndex = stStatus.Text.Length;
+            StaticBoxAppend("已保存图像 \"{0}\" 用时 {1:N0} 毫秒\n", sfn, sw.Elapsed.TotalMilliseconds);
             IsImageModified = false;
             UpdateColorStatus();
 
