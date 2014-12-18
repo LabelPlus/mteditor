@@ -8,7 +8,7 @@ Developing new version which REALLY supports multi-language.
 Language: C# (.net framework 4)
 Licence : GPLv2
 
-正在重制新版本
+正在重制新版本: https://github.com/wiki908/carimark
 
 运行需要安装 .net Framework 4
 地址：http://www.microsoft.com/zh-cn/download/details.aspx?id=17718
